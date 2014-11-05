@@ -1,20 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Project21</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <title>project 2.1</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
-
+  
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
 
 </head>
 <body>
+  <nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Project 2.1</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+<!--       <ul class="nav navbar-nav">
+        <li><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>
+      </ul> -->
+
+      <ul class="nav navbar-nav navbar-right">
+            <li>
+              <% if current_user %>
+                <%= link_to "Logout", sessions_path, method: :delete %>
+              <% else %>
+                <li><%= link_to "Login", new_sessions_path %></li>
+                <li><%= link_to "Sign Up", new_user_path %></li>
+              <% end %>
+            </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+  </nav>
 
 
+<%= yield %>  
 
-<%= yield %>
+
 
 </body>
 </html>

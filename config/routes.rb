@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
 
   root 'pages#index'
+  resources :pages
+  resources :locations
+  post 'locations/new_review' => 'locations#new_review', as: :new_review
+  resources :users, except: [:destroy]
+  resource :sessions, only: [:create, :new, :destroy]
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

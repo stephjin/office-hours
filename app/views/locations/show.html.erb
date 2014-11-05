@@ -1,0 +1,24 @@
+<p>Add this location to your favorites</p>
+
+
+
+<%= @location.address %>
+<%= @location.description %>
+
+<p>reviews for each location</p>
+
+<% @location.reviews.each do |review| %>
+  <%= review.title %>
+  <%= review.body %>
+<% end %>
+
+<%= bootstrap_form_for(@review ,:url => {:action => :new_review, :controller => :locations} ) do |f| %>
+  <%= hidden_field_tag :location_id, @location.id %>
+  <div class="field">
+    <%= f.text_field :title%>
+  </div>
+  <div class="field">
+    <%= f.text_field :body%>
+  </div>
+  <%= f.submit %>
+<% end %>
