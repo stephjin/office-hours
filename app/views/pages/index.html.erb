@@ -69,10 +69,21 @@
       });
 
       google.maps.event.addListener(marker, 'click', function() {
-        placewindow.setContent(place.name);
+        placewindow.setContent('<p><strong>'+place.name+'</strong></p>' +
+          '<p>'+place.vicinity+'</p>' +
+          '<button onclick="myFunction()"> Add to Favorite Locations</button>');
         placewindow.open(map, this);
       });
     }
+
+    function myFunction() {
+      alert("kjwenf");
+    }
+
+    // function showInfoWindow() {
+    //   placewindow.setContent(place.name);
+    //   placewindow.open(map, this);      
+    // }
 
     function handleNoGeolocation(errorFlag) {
       if (errorFlag) {
