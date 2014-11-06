@@ -8,10 +8,11 @@
   <script>
     var map;
     var image = "http://fc06.deviantart.net/fs70/f/2012/037/4/5/gold_star_icon_by_midnight_flame-d4oxfby.png";
+    var placewindow;
 
     function initialize () {
       var mapOptions = {
-        zoom: 15
+        zoom: 16
       };
       
       map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
@@ -34,12 +35,43 @@
           // });
 
           map.setCenter(pos);
+
+          var request = {
+            location: pos,
+            radius: 500,
+            types: ['cafe']
+          };
+
+          placewindow = new google.maps.InfoWindow();
+          var service = new google.maps.places.PlacesService(map);
+          service.nearbySearch(request, callback);
         }, function() {
           handleNoGeolocation(true);
         });
       } else {
         handleNoGeolocation(false);
       }
+    }
+
+    function callback(results, status) {
+      if(status == google.maps.places.PlacesServiceStatus.OK) {
+        for (var i = 0; i < results.length; i++) {
+          createMarker(results[i]);
+        }
+      }
+    }
+
+    function createMarker(place) {
+      var placeLoc = place.geometry.location;
+      var marker = new google.maps.Marker({
+        map: map,
+        position: place.geometry.location
+      });
+
+      google.maps.event.addListener(marker, 'click', function() {
+        placewindow.setContent(place.name);
+        placewindow.open(map, this);
+      });
     }
 
     function handleNoGeolocation(errorFlag) {
@@ -59,7 +91,10 @@
       map.setCenter(options.position);
     }
 
-    
+
+
+
+
 
 
     google.maps.event.addDomListener(window, 'load', initialize);
