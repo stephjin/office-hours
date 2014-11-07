@@ -8,7 +8,7 @@
   <script>
     var map;
     var image = "http://fc06.deviantart.net/fs70/f/2012/037/4/5/gold_star_icon_by_midnight_flame-d4oxfby.png";
-    var placewindow;
+    var cafeInfo;
     var autocomplete;
     var place;
 
@@ -30,12 +30,6 @@
             title: 'You are here!'
           });
 
-          // var infowindow = new google.maps.InfoWindow( {
-          //   map: map,
-          //   position: pos,
-          //   content: 'You are here'
-          // });
-
           map.setCenter(pos);
 
           var request = {
@@ -44,13 +38,16 @@
             types: ['cafe']
           };
 
-          placewindow = new google.maps.InfoWindow();
+          cafeInfo = new google.maps.InfoWindow();
           var service = new google.maps.places.PlacesService(map);
           service.nearbySearch(request, callback);
 
-          input = new google.maps.places.Autocomplete(
-            /** @type {HTMLInputElement} */(document.getElementById('userInput')),
-            { types: [] });
+          // input = new google.maps.places.Autocomplete(
+          //   * @type {HTMLInputElement} (document.getElementById('userInput')),
+          //   { types: [] });
+
+
+          // place = 
 
         }, function() {
           handleNoGeolocation(true);
@@ -68,28 +65,35 @@
       }
     }
 
+    var placeLng;
+    var placeLat;
+
     function createMarker(place) {
       var marker = new google.maps.Marker({
         map: map,
         position: place.geometry.location
       });
 
+      placeLat = place.geometry.location.lat();
+      placeLng = place.geometry.location.lng();
+
       google.maps.event.addListener(marker, 'click', function() {
-        placewindow.setContent('<p><strong>'+place.name+'</strong></p>' +
+        cafeInfo.setContent('<p><strong>'+place.name+'</strong></p>' +
           '<p>'+place.vicinity+'</p>' +
-          '<button onclick="saveLoc()"> Add to Favorite Locations</button>');
-        placewindow.open(map, this);
+          '<p>'+placeLat+'</p>');
+          // '<button onclick="saveLoc()"> Add to Favorite Locations</button>');
+          // '<a href="/locations/new"> add</a>');
+        cafeInfo.open(map, this);
       });
+
+
     }
 
-    function saveLoc() {
-      alert("kjwenf");
-    }
-
-    // function showInfoWindow() {
-    //   placewindow.setContent(place.name);
-    //   placewindow.open(map, this);      
+    // function saveLoc() {
+    //   console.log(placeLng + ", " + placeLat);
+    //   document.getElementById("locationLng").value = placeLng;
     // }
+
 
     function handleNoGeolocation(errorFlag) {
       if (errorFlag) {
@@ -132,14 +136,17 @@
       <div class="row">
         <div class="col-xs-6">
 
-          <div id="locationField">
+<!--           <div id="locationField">
             <input id="userInput" placeholder="Enter your address" type="text"></input>
-          </div>
+          </div> -->
+
+          <%= render 'locations/form' %>
 
           
         </div>
         <div class="col-xs-6">
           <h3>Favorite Locations</h3>
+
           <%= link_to "Add a location", new_location_path %>
           <p>
           <% @locations.each do |location| %>
