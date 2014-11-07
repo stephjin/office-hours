@@ -9,6 +9,8 @@
     var map;
     var image = "http://fc06.deviantart.net/fs70/f/2012/037/4/5/gold_star_icon_by_midnight_flame-d4oxfby.png";
     var placewindow;
+    var autocomplete;
+    var place;
 
     function initialize () {
       var mapOptions = {
@@ -21,7 +23,7 @@
         navigator.geolocation.getCurrentPosition(function(position) {
           var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
-          var marker = new google.maps.Marker({
+          var originMarker = new google.maps.Marker({
             position: pos,
             map: map,
             icon: image,
@@ -38,13 +40,18 @@
 
           var request = {
             location: pos,
-            radius: 500,
+            radius: 2000,
             types: ['cafe']
           };
 
           placewindow = new google.maps.InfoWindow();
           var service = new google.maps.places.PlacesService(map);
           service.nearbySearch(request, callback);
+
+          input = new google.maps.places.Autocomplete(
+            /** @type {HTMLInputElement} */(document.getElementById('userInput')),
+            { types: [] });
+
         }, function() {
           handleNoGeolocation(true);
         });
@@ -62,7 +69,6 @@
     }
 
     function createMarker(place) {
-      var placeLoc = place.geometry.location;
       var marker = new google.maps.Marker({
         map: map,
         position: place.geometry.location
@@ -71,12 +77,12 @@
       google.maps.event.addListener(marker, 'click', function() {
         placewindow.setContent('<p><strong>'+place.name+'</strong></p>' +
           '<p>'+place.vicinity+'</p>' +
-          '<button onclick="myFunction()"> Add to Favorite Locations</button>');
+          '<button onclick="saveLoc()"> Add to Favorite Locations</button>');
         placewindow.open(map, this);
       });
     }
 
-    function myFunction() {
+    function saveLoc() {
       alert("kjwenf");
     }
 
@@ -126,68 +132,10 @@
       <div class="row">
         <div class="col-xs-6">
 
-
-
-
-<!--           <div id="findcafes">
-            Find cafes in:
-          </div>
-
           <div id="locationField">
-            <input id="autocomplete" placeholder="Enter a city" type="text" />
+            <input id="userInput" placeholder="Enter your address" type="text"></input>
           </div>
 
-          <div id="controls">
-            <select id="country">
-              <option value="all">All</option>
-              <option value="au">Australia</option>
-              <option value="br">Brazil</option>
-              <option value="ca">Canada</option>
-              <option value="fr">France</option>
-              <option value="de">Germany</option>
-              <option value="mx">Mexico</option>
-              <option value="nz">New Zealand</option>
-              <option value="it">Italy</option>
-              <option value="za">South Africa</option>
-              <option value="es">Spain</option>
-              <option value="pt">Portugal</option>
-              <option value="us" selected>USA</option>
-              <option value="uk">UK</option>
-            </select>
-          </div>
-
-
-
-          <div id="listing">
-            <table id="resultsTable">
-              <tbody id="results"></tbody>
-            </table>
-          </div>
-    
-          <div id="info-content">
-            <table>
-              <tr id="iw-url-row" class="iw_table_row">
-                <td id="iw-icon" class="iw_table_icon"></td>
-                <td id="iw-url"></td>
-              </tr>
-              <tr id="iw-address-row" class="iw_table_row">
-                <td class="iw_attribute_name">Address:</td>
-                <td id="iw-address"></td>
-              </tr>
-              <tr id="iw-phone-row" class="iw_table_row">
-                <td class="iw_attribute_name">Telephone:</td>
-                <td id="iw-phone"></td>
-              </tr>
-              <tr id="iw-rating-row" class="iw_table_row">
-                <td class="iw_attribute_name">Rating:</td>
-                <td id="iw-rating"></td>
-              </tr>
-              <tr id="iw-website-row" class="iw_table_row">
-                <td class="iw_attribute_name">Website:</td>
-                <td id="iw-website"></td>
-              </tr>
-            </table>
-          </div> -->
           
         </div>
         <div class="col-xs-6">
