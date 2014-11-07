@@ -23,14 +23,13 @@ class LocationsController < ApplicationController
   end
 
   def create
+
     @location = Location.new(params.require(:location).permit(:name, :address, :description))
     if @location.save
       redirect_to locations_path
     else
       render 'new'
     end
-
-
   end
 
   def edit
