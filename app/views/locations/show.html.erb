@@ -1,38 +1,46 @@
-<p>Add this location to your favorites</p>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
 
-<div class="container-fluid">
-  <div class="row">
+<body>
+  <p>Add this location to your favorites</p>
+
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-xs-6">
+      <div class="row">
+        <div class="col-xs-6">
+          <%= @location.name %>
 
-        <%= @location.address %>
-        <%= @location.description %>
-        <%= link_to 'Edit', edit_location_path %>
-        <%= link_to 'Delete', @location, method: :delete, data: { confirm: 'Are you sure you want to delete it?'} %>
 
-      </div>
+          <%= @location.address %>
+          <%= @location.description %>
+          <%= link_to 'Edit', edit_location_path %>
+          <%= link_to 'Delete', @location, method: :delete, data: { confirm: 'Are you sure you want to delete it?'} %>
 
-      <div class="col-xs-6">
-        <p>reviews for each location</p>
 
-        <% @location.reviews.each do |review| %>
-          <%= review.title %>
-          <%= review.body %>
-        <% end %>
 
-        <%= bootstrap_form_for(@review ,:url => {:action => :new_review, :controller => :locations} ) do |f| %>
-          <%= hidden_field_tag :location_id, @location.id %>
-          <div class="field">
-            <%= f.text_field :title%>
-          </div>
-          <div class="field">
-            <%= f.text_field :body%>
-          </div>
-          <%= f.submit %>
-        <% end %>
+        </div>
 
-        <%= link_to 'Back', "javascript:history.back()" %>
+        <div class="col-xs-6">
+          <p>reviews for each location</p>
+
+          <% @location.reviews.each do |review| %>
+            <%= review.title %>
+            <%= review.body %>
+          <% end %>
+
+          <%= bootstrap_form_for(@review ,:url => {:action => :new_review, :controller => :locations} ) do |f| %>
+            <%= hidden_field_tag :location_id, @location.id %>
+            <div class="field">
+              <%= f.text_field :title%>
+            </div>
+            <div class="field">
+              <%= f.text_field :body%>
+            </div>
+            <%= f.submit %>
+          <% end %>
+
+          <%= link_to 'Back', "javascript:history.back()" %>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</body>

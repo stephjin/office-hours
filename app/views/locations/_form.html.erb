@@ -18,10 +18,11 @@
   <div class="field">
     <%= f.text_field :address %>
   </div>
-  
+  <%if @location.coordinates %>
   <div class="field">
     <span id="locCoords"><%= f.text_field :coordinates %></span>
   </div>
+  <%end%>
   
   <div class="field">
     <%= f.text_field :description %>
