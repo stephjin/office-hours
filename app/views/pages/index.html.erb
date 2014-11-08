@@ -1,6 +1,10 @@
 <% if current_user %>
 
-   <body>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
+
+
+<body>
+<!-- form partial here -->
 
 
 
@@ -8,17 +12,7 @@
     <div class="row">
       <div class="row">
         <div class="col-xs-6">
-
-<!--           <div id="locationField">
-            <input id="userInput" placeholder="Enter your address" type="text"></input>
-          </div> -->
-
-          
-        </div>
-        <div class="col-xs-6">
-          <h3>Favorite Locations</h3>
-
-          <%= link_to "Add a location", new_location_path %>
+          <h3>Locations</h3>
           <p>
           <% @locations.each do |location| %>
             <ul>
@@ -28,6 +22,44 @@
             </ul>
           <% end %>
           </p>
+          
+        </div>
+        <div class="col-xs-6">
+          <%# render 'views/locations/form' %>
+          <%= bootstrap_form_for(@location) do |f| %>
+            <% if @location.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@location.errors.count, "error") %> prohibited this location from being saved:</h2>
+
+                <ul>
+                <% @location.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <div class="field">
+              <%= f.text_field :name %>
+            </div>
+
+            <div class="field">
+              <%= f.text_field :address %>
+            </div>
+            
+            <div class="field">
+              <span id="locCoords"><%= f.text_field :coordinates %></span>
+            </div>
+            
+            <div class="field">
+              <%= f.text_field :description %>
+            </div>
+            
+            <div class="actions">
+              <%= f.submit %>
+            </div>
+
+          <% end %>
         </div>
       </div>
     </div>

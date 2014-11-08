@@ -23,10 +23,9 @@ class LocationsController < ApplicationController
   end
 
   def create
-
     @location = Location.new(params.require(:location).permit(:name, :address, :description))
     if @location.save
-      redirect_to locations_path
+      redirect_to root_path
     else
       render 'new'
     end
@@ -34,6 +33,7 @@ class LocationsController < ApplicationController
 
   def edit
     @location = Location.find(params[:id])
+
   end
 
 end
