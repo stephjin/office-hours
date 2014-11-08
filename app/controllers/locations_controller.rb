@@ -36,4 +36,19 @@ class LocationsController < ApplicationController
 
   end
 
+  def update
+    @location = Location.find(params[:id])
+    if @location.update_attributes(params.require(:location).permit(:name, :address, :description))
+      redirect_to location_path(@location.id)
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    @location = Location.find(params[:id])
+    @location.destroy
+    redirect_to root_path
+  end
+
 end

@@ -8,6 +8,7 @@
         <%= @location.address %>
         <%= @location.description %>
         <%= link_to 'Edit', edit_location_path %>
+        <%= link_to 'Delete', @location, method: :delete, data: { confirm: 'Are you sure you want to delete it?'} %>
 
       </div>
 
