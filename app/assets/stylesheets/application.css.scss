@@ -24,6 +24,32 @@ body {
 }
 
 .col-xs-6 {
-  border: 1px solid #000;
+  // border: 1px solid #000;
   padding: 10px 20px;
+}
+
+#splash {
+  margin: 0 auto;
+  text-align: center;
+
+}
+
+#splashtext {
+  color: #000;  
+}
+
+.box {
+  border: 1px solid #000;
+  width: 150px;
+  height: 150px;
+  display: inline-block;
+}
+
+.box li {
+  list-style: none;
+  padding-top: 2px;
+}
+
+.row #thumbgrid {
+  padding-left: 10px;
 }
