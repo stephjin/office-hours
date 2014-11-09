@@ -5,13 +5,12 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-xs-6">
-        <div class="reviewBox">
-          <h4><%= @location.name %></h4>
-          <%= @location.address %><br>
-          <%= @location.description %><br>
-
-          <%= link_to 'Edit', edit_location_path %>
-          <%= link_to 'Delete', @location, method: :delete, data: { confirm: 'Are you sure you want to delete it?'} %>
+        <div class="descBox">
+          <span id="editcontrols"><p><%= link_to 'Edit'.upcase, edit_location_path %> | <%= link_to 'Delete'.upcase, @location, method: :delete, data: { confirm: 'Are you sure you want to delete it?'} %></p></span>
+          <h2><%= @location.name.upcase %></h2>
+          <%= @location.address.upcase %><br>
+          <%= @location.description %><hr>
+          
         </div>
         <div class="nearbyBox">
           <p>This spot too crowded? Check out some others near you.</p>
@@ -28,10 +27,10 @@
       </div>
 
       <div class="col-xs-4">
-        <h4>Reviews</h4>
+        <h2>REVIEWS</h2>
           <% if @location.reviews.count > 0 %>
               <% @location.reviews.each do |review| %>
-                <p><strong><%= review.title %></strong> // USERNAME<br>
+                <p><strong><%= review.title %></strong><br>
                 <%= review.body %></p>
               <% end %>
           <% else %>

@@ -1,9 +1,11 @@
 
+
   <% if current_user %>
     <div class="container-fluid">
       <div class="row">
         <div class="col-xs-6">
-          <h3>Locations</h3>
+          <h1>Welcome back, <%= current_user.name %></h1>
+          <h2>LOCATIONS</h2>
 
   <!--           <div class="row">
             <div class="col-xs-4">hi</div>
@@ -29,7 +31,7 @@
           
         </div>
         <div class="col-xs-4">
-          <h3>Add a new Location</h3>
+          <h2>ADD A LOCATION</h2>
           <%= render 'locations/form' %>
           
         </div>
