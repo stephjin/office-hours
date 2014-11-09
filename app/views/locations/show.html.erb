@@ -6,10 +6,14 @@
     <div class="row">
       <div class="col-xs-6">
         <div class="descBox">
-          <span id="editcontrols"><p><%= link_to 'Edit'.upcase, edit_location_path %> | <%= link_to 'Delete'.upcase, @location, method: :delete, data: { confirm: 'Are you sure you want to delete it?'} %></p></span>
+          
           <h2><%= @location.name.upcase %></h2>
-          <%= @location.address.upcase %><br>
-          <%= @location.description %><hr>
+          <p><%= @location.address.upcase %></p>
+          Resources: <%= @location.resources %><br>
+          Wifi: <%= @location.wifi %><br>
+          Noise Level: <%= @location.noise %><br><br>
+          <%= @location.description %><br><br>
+          <span id="editcontrols"><%#= link_to 'Edit'.upcase, edit_location_path %> <%= render 'locations/form' %> // <%= link_to 'Delete'.upcase, @location, method: :delete, data: { confirm: 'Are you sure you want to delete it?'} %></span><hr>
           
         </div>
         <div class="nearbyBox">
@@ -24,6 +28,9 @@
               <ul><li>Looks like there aren't any other spots near you! :(</li></ul> 
             <% end %>
         </div>
+        <hr>
+        <%= link_to 'Back', root_path %>
+
       </div>
 
       <div class="col-xs-4">

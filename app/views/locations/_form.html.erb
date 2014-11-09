@@ -1,35 +1,68 @@
-<%= bootstrap_form_for(@location) do |f| %>
-  <% if @location.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@location.errors.count, "error") %> prohibited this location from being saved:</h2>
+<a href id="editlink" data-toggle="modal" data-target="#editModal">EDIT</a>
 
-      <ul>
-      <% @location.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Edit this location</h4>
+      </div>
+        <div class="modal-body">
+
+          <%= bootstrap_form_for(@location) do |f| %>
+            <% if @location.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@location.errors.count, "error") %> prohibited this location from being saved:</h2>
+
+                <ul>
+                <% @location.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <div class="field">
+              <%= f.text_field :name %>
+            </div>
+
+            <div class="field">
+              <%= f.text_field :address %>
+            </div>
+
+            <%if @location.coordinates %>
+              <div class="field">
+                <%= f.text_field :coordinates %>
+              </div>
+            <%end%>
+
+            <div class="field">
+              <%= f.text_field :resources %>
+            </div>
+
+            <div class="field">
+              <%= f.text_field :wifi %>
+            </div>
+
+            <div class="field">
+              <%= f.text_field :noise %>
+            </div>
+
+            <div class="field">
+              <%= f.text_field :description %>
+            </div>
+            
+            <div class="actions">
+              <%= f.submit %>
+            </div>
+
+          <% end %>
+
+      </div>
     </div>
-  <% end %>
+  </div>
+</div>
 
-  <div class="field">
-    <%= f.text_field :name %>
-  </div>
 
-  <div class="field">
-    <%= f.text_field :address %>
-  </div>
-  <%if @location.coordinates %>
-  <div class="field">
-    <%= f.text_field :coordinates %>
-  </div>
-  <%end%>
-  
-  <div class="field">
-    <%= f.text_field :description %>
-  </div>
-  
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 
-<% end %>

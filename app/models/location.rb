@@ -6,6 +6,9 @@ class Location
   field :description, type: String
   field :coordinates, :type => Array
   field :nearby, type: String
+  field :resources, type: String
+  field :wifi, type: String
+  field :noise, type: String
 
   has_many :reviews
   validates_presence_of :address

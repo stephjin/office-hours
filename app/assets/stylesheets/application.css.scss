@@ -19,6 +19,7 @@
 body { 
   margin: 0; 
   padding: 0;
+  background-image: url("bg.jpg");
 }
 
 .navbar {
@@ -79,8 +80,4 @@ label, .modal-title, h2, h1  {
 .col-xs-6, .col-xs-4 {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
-}
-
-#editcontrols {
-  text-align: right;
 }
