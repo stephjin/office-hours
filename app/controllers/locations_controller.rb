@@ -8,7 +8,7 @@ class LocationsController < ApplicationController
     @location = Location.find(params[:id])
     @locations = Location.all
     @review = Review.new
-    @location.longitude = params[@location.coordinates[0]]
+    @nearby = Location.near(@location, 10,  :order => "distance").to_a
   end
 
   def new

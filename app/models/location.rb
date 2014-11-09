@@ -5,8 +5,7 @@ class Location
   field :address, type: String
   field :description, type: String
   field :coordinates, :type => Array
-  field :latitude,  :type => Float
-  field :longitude, :type => Float
+  field :nearby, type: String
 
   has_many :reviews
   validates_presence_of :address
