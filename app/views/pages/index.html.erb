@@ -1,17 +1,16 @@
-<% if current_user %>
 
-  <div class="container-fluid">
-    <div class="row">
+  <% if current_user %>
+    <div class="container-fluid">
       <div class="row">
         <div class="col-xs-6">
           <h3>Locations</h3>
 
-<!--           <div class="row">
+  <!--           <div class="row">
             <div class="col-xs-4">hi</div>
             <div class="col-xs-4">bye</div>
             <div class="col-xs-4">still here</div>
           </div>
- -->
+  -->
 
           <p>
           <% @locations.each do |location| %>
@@ -22,7 +21,7 @@
                   <%=link_to "See more", location_path(location) %>
                 </li>
               </ul>
-<!--                 <li><%#= location.address %></li>
+  <!--                 <li><%#= location.address %></li>
               <li><%#= location.description %></li> -->
             </div>
           <% end %>
@@ -30,25 +29,23 @@
           
         </div>
         <div class="col-xs-4">
+          <h3>Add a new Location</h3>
           <%= render 'locations/form' %>
           
         </div>
       </div>
     </div>
+
+    <% else %>
+
+  <div class="splashpage">
+      <div id="splash">
+
+        <%= render 'login' %>
+
+        <%= render 'signup' %>
+      </div>
   </div>
+  <% end %>
 
-
-  <% else %>
-
-  <div id="splash">
-    <p id="splashtext">This is the home page for Project 2.1</p>
-    <p id="splashtext">Filler text about the purpose of this website. User is unable to see anything unless they are logged in.</p>
-
-    <%= render 'login' %>
-
-    <%= render 'signup' %>
-  </div>
-
-<% end %>
-
-
+</div>

@@ -1,46 +1,53 @@
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
 
 <body>
-  <p>Add this location to your favorites</p>
 
   <div class="container-fluid">
     <div class="row">
-      <div class="row">
-        <div class="col-xs-6">
-          <%= @location.name %><br>
+      <div class="col-xs-6">
+        <div class="reviewBox">
+          <h4><%= @location.name %></h4>
           <%= @location.address %><br>
           <%= @location.description %><br>
 
           <%= link_to 'Edit', edit_location_path %>
           <%= link_to 'Delete', @location, method: :delete, data: { confirm: 'Are you sure you want to delete it?'} %>
-
-          <p>This cafe too crowded?</p>
-          <ul>
-            <% for index in (1...@nearby.length) %>
-              <li><%= link_to @nearby[index].name, location_path(@nearby[index]) %></li>
-          <% end %>
-          </ul>
         </div>
-
-        <div class="col-xs-4">
-          <p>reviews for each location</p>
-
-          <% @location.reviews.each do |review| %>
-            <%= review.title %>
-            <%= review.body %>
-          <% end %>
-
-          <%= bootstrap_form_for(@review ,:url => {:action => :new_review, :controller => :locations} ) do |f| %>
-            <%= hidden_field_tag :location_id, @location.id %>
-            <div class="field">
-              <%= f.text_field :title%>
-            </div>
-            <div class="field">
-              <%= f.text_field :body%>
-            </div>
-            <%= f.submit %>
-          <% end %>
+        <div class="nearbyBox">
+          <p>This spot too crowded? Check out some others near you.</p>
+            <% if @nearby.length > 1 %>
+              <ul>
+                <% for index in (1...@nearby.length) %>
+                  <li><%= link_to @nearby[index].name, location_path(@nearby[index]) %></li>
+              <% end %>
+              </ul>
+            <% else %>
+              <ul><li>Looks like there aren't any other spots near you! :(</li></ul> 
+            <% end %>
         </div>
+      </div>
+
+      <div class="col-xs-4">
+        <h4>Reviews</h4>
+          <% if @location.reviews.count > 0 %>
+              <% @location.reviews.each do |review| %>
+                <p><strong><%= review.title %></strong> // USERNAME<br>
+                <%= review.body %></p>
+              <% end %>
+          <% else %>
+            <p>No reviews yet! Be the first to write a review.</p>
+          <% end %>
+
+        <%= bootstrap_form_for(@review ,:url => {:action => :new_review, :controller => :locations} ) do |f| %>
+          <%= hidden_field_tag :location_id, @location.id %>
+          <div class="field">
+            <%= f.text_field :title%>
+          </div>
+          <div class="field">
+            <%= f.text_field :body%>
+          </div>
+          <%= f.submit %>
+        <% end %>
       </div>
     </div>
   </div>
