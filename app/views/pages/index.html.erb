@@ -27,7 +27,14 @@
 
   <% else %>
 
-<p>This is the home page for Project 2.1</p>
-<p>Filler text about the purpose of this website. User is unable to see anything unless they are logged in.</p>
-    
+  <div id="splash">
+    <p>This is the home page for Project 2.1</p>
+    <p>Filler text about the purpose of this website. User is unable to see anything unless they are logged in.</p>
+
+    <%= render 'login' %>
+
+    <%= render 'signup' %>
+
 <% end %>
+
+

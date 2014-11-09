@@ -8,6 +8,7 @@ class LocationsController < ApplicationController
     @location = Location.find(params[:id])
     @locations = Location.all
     @review = Review.new
+    @location.longitude = params[@location.coordinates[0]]
   end
 
   def new

@@ -5,7 +5,9 @@ class PagesController < ApplicationController
   def index
     @locations = Location.all
     @location = Location.new
-    
+    @users = User.all
+    @user = User.new
   end
+
   
 end

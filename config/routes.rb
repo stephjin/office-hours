@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :locations
   post 'locations/new_review' => 'locations#new_review', as: :new_review
   resources :users, except: [:destroy]
+  get 'users/new' => 'users#new', :as => :new
   resource :sessions, only: [:create, :new, :destroy]
 
 
