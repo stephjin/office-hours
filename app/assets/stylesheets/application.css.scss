@@ -71,13 +71,15 @@ body {
 }
 
 
-label, .modal-title, h2, h1  {
+.modal-title, h2, h1, .navbar-header, .navbar-right  {
   font-family: Gotham Condensed, serif;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
 
-.col-xs-6, .col-xs-4 {
+.col-xs-6, .col-xs-4, label {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
 }
+
+
