@@ -42,3 +42,5 @@ gem 'bootstrap_form'
 gem 'figaro'
 gem 'geocoder'
 gem 'rails_12factor'
+
+ruby '2.1.2'
