@@ -16,6 +16,19 @@
           <span id="editcontrols"><%#= link_to 'Edit'.upcase, edit_location_path %> <%= render 'locations/form' %> // <%= link_to 'Delete'.upcase, @location, method: :delete, data: { confirm: 'Are you sure you want to delete it?'} %></span><hr>
           
         </div>
+        <div class="nearbyBox">
+          <p>This spot too crowded? Check out some others near you.</p>
+            <% if @nearby.length > 1 %>
+              <ul>
+                <% for index in (1...@nearby.length) %>
+                  <li><%= link_to @nearby[index].name, location_path(@nearby[index]) %></li>
+              <% end %>
+              </ul>
+            <% else %>
+              <ul><li>Looks like there aren't any other spots near you! :(</li></ul> 
+            <% end %>
+        </div>
+        <hr>
         <%= link_to 'Back', root_path %>
 
       </div>
