@@ -40,7 +40,7 @@ gem 'mongoid', github: 'mongoid/mongoid'
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'bootstrap_form'
 gem 'figaro'
-gem 'geocoder'
+gem 'geocoder', github: 'alexreisner/geocoder'
 gem 'rails_12factor'
 
 ruby '2.1.2'
