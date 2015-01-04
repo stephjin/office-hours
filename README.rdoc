@@ -1,3 +1,5 @@
 == Project 2
 
-This location reviewer project uses basic CRUD functionality.
+Office Hours is a Ruby on Rails application that exhibits full CRUD functionality. This app is used to review public cafes that could potentially be good workspaces.
+
+The second iteration of this project will focus on incoporating business owners who will add their cafes and allow users to add reviews rather than users uploading cafes that they have been to.
